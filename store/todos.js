@@ -1,5 +1,5 @@
- import firebase, { analytics } from "firebase";
- import { firebaseAction, firestoreAction } from "vuexfire";
+ import firebase from '~/plugins/firebase';
+ import { firestoreAction } from 'vuexfire';
 
 //  firestore(db)の設定
 const db = firebase.firestore();
@@ -15,7 +15,7 @@ export const state = () => ({
 
 export const actions = {
   // vuexfireが用意しているfirebaseAction呼び出し
-  init:firebaseAction(({bindFirestoreRef}) => {
+  init:firestoreAction(({bindFirestoreRef}) => {
     //bind(関連付け)する
     bindFirestoreRef('todos',todosRef)
   }),
@@ -31,7 +31,7 @@ export const actions = {
     }
   }),
   //todoの削除
-  remove:firebaseAction((context,id)=> {
+  remove:firestoreAction((context,id)=> {
     // documentIdを指定して削除
     todosRef.doc(id).delete()
   }),
