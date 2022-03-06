@@ -9,8 +9,10 @@
       <input type="checkbox" 
       v-bind:checked="todo.done" 
       @change="toggle(todo)">
+      <span  v-bind:class="{done:todo.done}">
       {{todo.name}}
-      {{todo.created}}
+      {{todo.created.toDate() | dateFilter}}
+      </span>
       <button v-on:click="remove(todo.id)">削除ボタン</button>
       </li>
     </ul>
@@ -25,6 +27,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   // データの用意(新規登録データを一時格納)
   data:function() {
@@ -59,8 +62,18 @@ export default {
       // storeのtodosの値を返却
       return this.$store.state.todos.todos
     }
+  },
+  filters: {
+    dateFilter:function(date) {
+      return moment(date).format('YYYY/MM/DD HH:mm:ss')
+    }
   }
 }
-
-
 </script>
+
+<style>
+li > span.done {
+  /* 完了TODO取り消しスタイル */
+  text-decoration: line-through;
+}
+</style>
