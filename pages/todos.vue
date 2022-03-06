@@ -15,6 +15,7 @@
       {{todo.created.toDate() | dateFilter}}
       </span>
       <button v-on:click="remove(todo.id)">削除ボタン</button>
+      
       </span>
       </li>
     </ul>
@@ -30,6 +31,7 @@
 
 <script>
 import moment from 'moment'
+
 export default {
   // データの用意(新規登録データを一時格納)
   data:function() {
@@ -62,7 +64,7 @@ export default {
   computed: {
     todos() {
       // storeのtodosの値を返却
-      return this.$store.state.todos.todos
+      return this.$store.getters['todos/orderedTodos']
     }
   },
   filters: {

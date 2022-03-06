@@ -42,3 +42,10 @@ export const actions = {
     })
   }) 
 }
+
+export const getters = {
+  orderedTodos:state => {
+    // stateのtodosをcreatedでsortして返却
+    return _.sortBy(state.todos,'created')
+  }
+}
