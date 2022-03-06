@@ -5,7 +5,10 @@
     <!-- {{todos}} -->
     <ul>
       <li v-for="todo in todos" :key="todo.id">
-      {{todo.done}}
+      <!-- @change checkの状態が変更した時にtoggleメソッドを呼び出す -->
+      <input type="checkbox" 
+      v-bind:checked="todo.done" 
+      @change="toggle(todo)">
       {{todo.name}}
       {{todo.created}}
       <button v-on:click="remove(todo.id)">削除ボタン</button>
@@ -35,14 +38,20 @@ export default {
     this.$store.dispatch('todos/init')
   },
   methods: {
+    // todo追加
     add() {
-      // store/todos.jsのaddを呼び出している
+      // store/todos.jsのactionsのaddを呼び出している
       this.$store.dispatch('todos/add',this.name)
       // フォームの入力値をクリア
       this.name = '';
     },
+    // todo削除
   remove(id) {
     this.$store.dispatch('todos/remove',id)
+  },
+  // 
+  toggle(todo) {
+    this.$store.dispatch('todos/toggle',todo)
   }
 },
   computed: {
