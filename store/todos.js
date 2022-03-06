@@ -21,7 +21,7 @@ export const actions = {
   }),
   // todoの追加
   add:firestoreAction((context,name) => {
-    // 入力値(todo)が空白ではないことを確認
+    // 未入力チェック
     if (name.trim()) {
       todosRef.add({
         name:name,　//todo
