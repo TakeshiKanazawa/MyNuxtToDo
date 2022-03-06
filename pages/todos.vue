@@ -5,6 +5,7 @@
     <!-- {{todos}} -->
     <ul>
       <li v-for="todo in todos" :key="todo.id">
+      <span v-if="todo.created">
       <!-- @change checkの状態が変更した時にtoggleメソッドを呼び出す -->
       <input type="checkbox" 
       v-bind:checked="todo.done" 
@@ -14,6 +15,7 @@
       {{todo.created.toDate() | dateFilter}}
       </span>
       <button v-on:click="remove(todo.id)">削除ボタン</button>
+      </span>
       </li>
     </ul>
     <div class="form">
@@ -72,7 +74,7 @@ export default {
 </script>
 
 <style>
-li > span.done {
+li > span span.done {
   /* 完了TODO取り消しスタイル */
   text-decoration: line-through;
 }
