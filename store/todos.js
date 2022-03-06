@@ -32,7 +32,7 @@ export const actions = {
   }),
   //todoの削除
   remove:firestoreAction((context,id)=> {
-    // documentIdを指定して削除
+    // FireStoreから、documentIdを指定して削除
     todosRef.doc(id).delete()
   }),
   // todoの完了　未完了の削除

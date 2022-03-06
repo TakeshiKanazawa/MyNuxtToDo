@@ -8,6 +8,7 @@
       {{todo.done}}
       {{todo.name}}
       {{todo.created}}
+      <button v-on:click="remove(todo.id)">削除ボタン</button>
       </li>
     </ul>
     <div class="form">
@@ -39,8 +40,11 @@ export default {
       this.$store.dispatch('todos/add',this.name)
       // フォームの入力値をクリア
       this.name = '';
-    }
-  },
+    },
+  remove(id) {
+    this.$store.dispatch('todos/remove',id)
+  }
+},
   computed: {
     todos() {
       // storeのtodosの値を返却
